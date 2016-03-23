@@ -18,11 +18,12 @@
 package snake.ladder
 
 class Player (val name:String, var position: Int = 0) {
-  var hasWon = false
+
 
   def apply(name:String) = new Player(name)
 
-  def move(dice : Dice) : Int = {
+  def move(dice : Dice) : (Int,Boolean) = {
+    var hasWon = false
     val num = dice.roll
     if (position == 0 && num == 1) {
       position = 1
@@ -39,6 +40,6 @@ class Player (val name:String, var position: Int = 0) {
     } else if (position == 0 && num != 1) {
       position = 0
     }
-    position
+    (position, hasWon)
   }
 }

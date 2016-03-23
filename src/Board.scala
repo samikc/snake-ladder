@@ -42,8 +42,10 @@ class Board(val snakes: Array[Snake], val ladders: Array[Ladder], val dice: Dice
     players ++= ps
   }
 
-  def movePlayer(p : Player): Unit = {
-    var playerPos = p.move(dice)
+  def movePlayer(p : Player): (Int, Boolean) = {
+    val status = p.move(dice)
+    var playerPos = status._1
+    val hasWon = status._2
 
     if (playerPos < 100) {
       val cell = cells(playerPos)
@@ -59,6 +61,7 @@ class Board(val snakes: Array[Snake], val ladders: Array[Ladder], val dice: Dice
       p.position = playerPos
       println("GAME PROGRESS: Player : "+p.name+"'s Position: "+playerPos)
     }
+    (playerPos, hasWon)
   }
 }
 

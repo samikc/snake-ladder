@@ -28,12 +28,12 @@ class Game{
     board.addPlayers(players)
     while (gameFinished == false) {
       for (player <- players) {
-        if (player.hasWon) {
+        val status = board.movePlayer(player)
+        moveCounter += 1
+        val hasWon = status._2
+        if (hasWon) {
           gameFinished = true
           println(player.name + " has won the game!!!")
-        } else {
-          board.movePlayer(player)
-          moveCounter += 1
         }
       }
     }
